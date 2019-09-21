@@ -47,7 +47,7 @@ This packages was mainly built to be used with Lumen, but it should work fine wi
 
 Add the generators package to your composer.json by running the command:
 
-`composer require wn/lumen-generators`
+`composer require tdev/lumen-generators`
 
 Then add the service provider in the file `app/Providers/AppServiceProvider.php`like the following:
 
@@ -55,7 +55,7 @@ Then add the service provider in the file `app/Providers/AppServiceProvider.php`
 public function register()
 {
     if ($this->app->environment() == 'local') {
-        $this->app->register('Wn\Generators\CommandsServiceProvider');
+        $this->app->register('Tdev\Generators\CommandsServiceProvider');
     }
 }
 ```
@@ -66,14 +66,14 @@ public function register()
 If you run the command `php artisan list` you will see the list of added commands:
 
 ```
-wn:controller               Generates RESTful controller using the RESTActions trait
-wn:controller:rest-actions  Generates REST actions trait to use into controllers
-wn:migration                Generates a migration to create a table with schema
-wn:model                    Generates a model class for a RESTfull resource
-wn:pivot-table              Generates creation migration for a pivot table
-wn:resource                 Generates a model, migration, controller and routes for RESTful resource
-wn:resources                Generates multiple resources from a file
-wn:route                    Generates RESTful routes.
+tdev:controller               Generates RESTful controller using the RESTActions trait
+tdev:controller:rest-actions  Generates REST actions trait to use into controllers
+tdev:migration                Generates a migration to create a table with schema
+tdev:model                    Generates a model class for a RESTfull resource
+tdev:pivot-table              Generates creation migration for a pivot table
+tdev:resource                 Generates a model, migration, controller and routes for RESTful resource
+tdev:resources                Generates multiple resources from a file
+tdev:route                    Generates RESTful routes.
 ```
 
 ## Quick Usage
@@ -81,7 +81,7 @@ wn:route                    Generates RESTful routes.
 To generate a RESTful resource for your application (model, migration, controller and RESTful routes), you simply need to run one single command. For example: 
 
 ```
-php artisan wn:resource task "name;string;required;fillable project_id;integer:unsigned;numeric;fillable,key due;date;;date" --add=timestamps --belongs-to=project
+php artisan tdev:resource task "name;string;required;fillable project_id;integer:unsigned;numeric;fillable,key due;date;;date" --add=timestamps --belongs-to=project
 ```
 
 will generate these files:
@@ -256,15 +256,15 @@ More then that, you can generate multiple resources with only one command ! [Cli
 
 ### Model Generator
 
-The `wn:model` command is used to generate a model class based on Eloquent. It has the following syntax:
+The `tdev:model` command is used to generate a model class based on Eloquent. It has the following syntax:
 
 ```
-wn:model name [--fillable=...] [--dates=...] [--has-many=...] [--has-one=...] [--belongs-to=...] [--belongs-to-many=...] [--rules=...] [--timestamps=false] [--path=...] [--soft-deletes=true] [--force=true]
+tdev:model name [--fillable=...] [--dates=...] [--has-many=...] [--has-one=...] [--belongs-to=...] [--belongs-to-many=...] [--rules=...] [--timestamps=false] [--path=...] [--soft-deletes=true] [--force=true]
 ```
 
 - **name**: the name of the model.
 
-`php artisan wn:model Task` generates the following:
+`php artisan tdev:model Task` generates the following:
 
 ```php
 <?php namespace App;
@@ -288,7 +288,7 @@ class Task extends Model {
 
 - **--fillable**: the mass fillable fields of the model separated with commas.
 
-`php artisan wn:model Task --fillable=name,title` gives:
+`php artisan tdev:model Task --fillable=name,title` gives:
 
 ```php
 //...	
@@ -297,7 +297,7 @@ class Task extends Model {
 
 - **--dates**: the date fields of the model, these will be converted automatically to `Carbon` instances on retrieval. 
 
-`php artisan wn:model Task --dates=started_at,published_at` gives:
+`php artisan tdev:model Task --dates=started_at,published_at` gives:
 
 ```php
 //...	
@@ -306,7 +306,7 @@ class Task extends Model {
 
 - **--path**: specifies the path where to store the model php file. This path is used to know the namespace of the model. The default value is "app".
 
-`php artisan wn:model Task --path="app/Http/Models"` gives:
+`php artisan tdev:model Task --path="app/Http/Models"` gives:
 
 ```php
 <?php namespace App\Http\Models;
@@ -316,7 +316,7 @@ class Task extends Model {
 - **--has-one**, **--has-many**, **--belongs-to** and **--belongs-to-many**: the relationships of the model following the syntax `relation1:model1,relation2:model2,...`. If the `model` is missing, it will be deducted from the relation's name. If the `model` is given without a namespace, it will be considered having the same namespace as the model being generated.
 
 ```
-php artisan wn:model Task --has-many=accounts --belongs-to="owner:App\User" --has-one=number:Phone belongs-to-many=tags --path=tests/tmp
+php artisan tdev:model Task --has-many=accounts --belongs-to="owner:App\User" --has-one=number:Phone belongs-to-many=tags --path=tests/tmp
 ```
 gives:
 
@@ -346,7 +346,7 @@ gives:
 - **--rules**: specifies the validation rules of the model's fields. The syntax is `field1=rules1 field2=rules2 ...`.
 
 ```
-php artisan wn:model TestingModel --rules="name=required age=integer|min:13 email=email|unique:users,email_address"`
+php artisan tdev:model TestingModel --rules="name=required age=integer|min:13 email=email|unique:users,email_address"`
 ```
 gives:
 
@@ -371,10 +371,10 @@ TestingModel model already exists; use --force option to override it !
 
 ### Migration Generator
 
-The `wn:migration` command is used to generate a migration to create a table with schema. It has the following syntax:
+The `tdev:migration` command is used to generate a migration to create a table with schema. It has the following syntax:
 
 ```
-wn:migration table [--schema=...] [--add=...] [--keys=...] [--force=true] [--file=...]
+tdev:migration table [--schema=...] [--add=...] [--keys=...] [--force=true] [--file=...]
 ```
 
 - **table**: the name of the table to create.
@@ -384,7 +384,7 @@ wn:migration table [--schema=...] [--add=...] [--keys=...] [--force=true] [--fil
 - **--schema**: the schema of the table using the syntax `field1:type.arg1,ag2:modifier1:modifier2.. field2:...`. The `type` could be `text`, `string.50`, `decimal.5,2` for example. Modifiers can be `unique` or `nullable` for example. [See documentation](http://laravel.com/docs/5.1/migrations#creating-columns) for the list of available types and modifiers.
 
 ```
-php artisan wn:migration tasks --schema="amount:decimal.5,2:after.'size':default.8 title:string:nullable"
+php artisan tdev:migration tasks --schema="amount:decimal.5,2:after.'size':default.8 title:string:nullable"
 ```
 gives:
 
@@ -420,7 +420,7 @@ class CreateTasksMigration extends Migration
 - **--keys**: the foreign keys of the table following the syntax `field:column:table:on_delete:on_update ...`. The `column` is optional ("id" by default). The `table` is optional if the field follows the naming convention `singular_table_name_id`. `on_delete` and `on_update` are optional too.
 
 ```
-php artisan wn:migration tasks --keys="category_type_id user_id:identifier:members:cascade"
+php artisan tdev:migration tasks --keys="category_type_id user_id:identifier:members:cascade"
 ```
 gives:
 
@@ -438,10 +438,10 @@ $table->foreign('user_id')
 
 ### Pivot Table Generator
 
-The `wn:pivot-table` command is used to generate a migration to create a pivot table between two models. It has the following syntax:
+The `tdev:pivot-table` command is used to generate a migration to create a pivot table between two models. It has the following syntax:
 
 ```
-wn:pivot-table model1 model2 [--add=...] [--force=true] [--file=...]
+tdev:pivot-table model1 model2 [--add=...] [--force=true] [--file=...]
 ```
 
 - **model1** and **model2**: names of the two models (or the two tables if the models don't follow the naming conventions)
@@ -451,7 +451,7 @@ wn:pivot-table model1 model2 [--add=...] [--force=true] [--file=...]
 - **--file**: The migration file name. By default the name follows the patern `date_time_create_table_name.php`.
 
 ```
-php artisan wn:pivot-table Tag Project --add=timestamps
+php artisan tdev:pivot-table Tag Project --add=timestamps
 ```
 gives:
 
@@ -489,7 +489,7 @@ class CreateProjectTagMigration extends Migration
 
 ### Controller Generator
 
-There are two commands for controllers. The first one is `wn:controller:rest-actions` which generates a trait used by all generated controllers. This trait includes the following methods:
+There are two commands for controllers. The first one is `tdev:controller:rest-actions` which generates a trait used by all generated controllers. This trait includes the following methods:
 
 - `all()` : returns all the model entries as JSON.
 
@@ -503,7 +503,7 @@ There are two commands for controllers. The first one is `wn:controller:rest-act
 
 Note that the trait doesn't use the common used methods on Laravel (like index, store, ...) to avoid conflicts. Which enables you to use this trait with controllers you already have in your application.
 
-The second command is `wn:controller` which actually generates the controller. The syntax of this command is `wn:controller model [--no-routes] [--force=true]`.
+The second command is `tdev:controller` which actually generates the controller. The syntax of this command is `tdev:controller model [--no-routes] [--force=true]`.
 
 - **model**: Name of the model (with namespace if not `App`).
 
@@ -513,7 +513,7 @@ The second command is `wn:controller` which actually generates the controller. T
 
 - **--laravel**: create Laravel style routes
 
-`php artisan wn:controller Task --no-routes` gives:
+`php artisan tdev:controller Task --no-routes` gives:
 
 
 ```php
@@ -531,9 +531,9 @@ class TasksController extends Controller {
 
 ### Routes Generator
 
-The `wn:route` command is used to generate RESTfull routes for a controller. It has the following syntax:
+The `tdev:route` command is used to generate RESTfull routes for a controller. It has the following syntax:
 
-`wn:route resource [--controller=...] [--force=true]`
+`tdev:route resource [--controller=...] [--force=true]`
 
 - **resource**: the resource name to use in the URLs.
 
@@ -544,7 +544,7 @@ The `wn:route` command is used to generate RESTfull routes for a controller. It 
 - **--laravel**: create Laravel style routes
 
 
-`php artisan wn:route project-type` adds the following routes:
+`php artisan tdev:route project-type` adds the following routes:
 
 ```php
 $app->get('project-type', 'ProjectTypesController@all');
@@ -555,7 +555,7 @@ $app->delete('project-type/{id}', 'ProjectTypesController@remove');
 ```
 
 
-`php artisan wn:route project-type --laravel` adds the following routes:
+`php artisan tdev:route project-type --laravel` adds the following routes:
 
 ```php
 Route::get('project-type', 'ProjectTypesController@all');
@@ -567,7 +567,7 @@ Route::delete('project-type/{id}', 'ProjectTypesController@remove');
 
 ### Resource Generator
 
-The `wn:resource` command makes it very easy to generate a RESTful resource. It generates a model, migration, controller and routes. The syntax is : `wn:resource name fields [--add=...] [--has-many=...] [--has-one=...] [--belongs-to=...] [--migration-file=...] [--path=...] [--force=true]`
+The `tdev:resource` command makes it very easy to generate a RESTful resource. It generates a model, migration, controller and routes. The syntax is : `tdev:resource name fields [--add=...] [--has-many=...] [--has-one=...] [--belongs-to=...] [--migration-file=...] [--path=...] [--force=true]`
 
 - **name**: the name of the resource used in the URLs and to determine the model, table and controller names. 
 
@@ -589,9 +589,9 @@ The `wn:resource` command makes it very easy to generate a RESTful resource. It 
 
 - **--add**: Specifies additional columns like `timestamps`, `softDeletes`, `rememberToken` and `nullableTimestamps` of the migration and if the list contains no timestamps, the model with contain `public $timestamps = false;`.
 
-- **--has-one**, **--has-many** and **--belongs-to** are the same as for the `wn:model` command.
+- **--has-one**, **--has-many** and **--belongs-to** are the same as for the `tdev:model` command.
 
-- **--migration-file**: passed to the `wn:migration` as the `--file` option.
+- **--migration-file**: passed to the `tdev:migration` as the `--file` option.
 
 - **--path**: Defines where to store the model file as well as its namespace.
 
@@ -602,10 +602,10 @@ The `wn:resource` command makes it very easy to generate a RESTful resource. It 
 
 ### Multiple Resources From File
 
-The `wn:resources` (note the "s" in "resources") command takes the generation process to an other level by parsing a file and generating multiple resources based on it. The syntax is 
+The `tdev:resources` (note the "s" in "resources") command takes the generation process to an other level by parsing a file and generating multiple resources based on it. The syntax is 
 
 ```
-wn:resources filename [--path=...] [--force=true]
+tdev:resources filename [--path=...] [--force=true]
 ```
 
 This generator is smart enough to add foreign keys automatically when finding a belongsTo relation. It also generates pivot tables for belongsToMany relations automatically.
@@ -665,7 +665,7 @@ To test the generators, I included a fresh lumen installation under the folder `
     
     - Requested Feature: [Fractal integration](https://github.com/webNeat/lumen-generators/issues/24)
     
-    - Requested Feature: [Add possibility to not run migrations when using `wn:resources`](https://github.com/webNeat/lumen-generators/issues/23)
+    - Requested Feature: [Add possibility to not run migrations when using `tdev:resources`](https://github.com/webNeat/lumen-generators/issues/23)
     
     - Documentation: [Adding examples](https://github.com/webNeat/lumen-generators/issues/20)
     
@@ -679,7 +679,7 @@ To test the generators, I included a fresh lumen installation under the folder `
 
 - **Version 1.3.1**
 
-    - Bug Fixed:  [duplicate column for the foriegn key when using `wn:resources`](https://github.com/webNeat/lumen-generators/issues/22)
+    - Bug Fixed:  [duplicate column for the foriegn key when using `tdev:resources`](https://github.com/webNeat/lumen-generators/issues/22)
 
 - **Version 1.3.0**
 
@@ -697,11 +697,11 @@ To test the generators, I included a fresh lumen installation under the folder `
     
     - Feature added: [Support for additional columns like nullableTimestamps() and softDeletes() in migrations](https://github.com/webNeat/lumen-generators/issues/12)
 
-    - Feature added: [Specifying namespace for `wn:resource` and `wn:resources`](https://github.com/webNeat/lumen-generators/issues/18)
+    - Feature added: [Specifying namespace for `tdev:resource` and `tdev:resources`](https://github.com/webNeat/lumen-generators/issues/18)
 
 - **Version 1.1.1**
 
-    - Pivot table generation from the `wn:resources` command bug fixed.
+    - Pivot table generation from the `tdev:resources` command bug fixed.
 
 - **Version 1.1.0**
 

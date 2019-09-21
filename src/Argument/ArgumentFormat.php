@@ -1,4 +1,4 @@
-<?php namespace Wn\Generators\Argument;
+<?php namespace Tdev\Generators\Argument;
 
 
 class ArgumentFormat {

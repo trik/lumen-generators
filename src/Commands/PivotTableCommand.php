@@ -1,9 +1,9 @@
-<?php namespace Wn\Generators\Commands;
+<?php namespace Tdev\Generators\Commands;
 
 
 class PivotTableCommand extends BaseCommand {
 
-	protected $signature = 'wn:pivot-table
+	protected $signature = 'tdev:pivot-table
         {model1 : Name of the first model or table}
         {model2 : Name of the second model or table}
         {--add= : specifies additional columns like timestamps, softDeletes, rememberToken and nullableTimestamps.}
@@ -19,7 +19,7 @@ class PivotTableCommand extends BaseCommand {
     {
         $this->parseTables();
 
-        $this->call('wn:migration', [
+        $this->call('tdev:migration', [
             'table' => implode('_', $this->tables),
             '--schema' => $this->schema(),
             '--keys' => $this->keys(),
@@ -33,7 +33,7 @@ class PivotTableCommand extends BaseCommand {
     protected function parseTables()
     {
         $this->tables = array_map(function($arg) {
-            return snake_case(str_singular($this->argument($arg)));
+            return Str::snake(Str::singular($this->argument($arg)));
         }, ['model1', 'model2']);
 
         sort($this->tables);

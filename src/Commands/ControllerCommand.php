@@ -1,11 +1,12 @@
-<?php namespace Wn\Generators\Commands;
+<?php namespace Tdev\Generators\Commands;
 
 
 use InvalidArgumentException;
+use Illuminate\Support\Str;
 
 class ControllerCommand extends BaseCommand {
 
-	protected $signature = 'wn:controller
+	protected $signature = 'tdev:controller
         {model : Name of the model (with namespace if not App)}
 		{--no-routes= : without routes}
         {--force= : override the existing files}
@@ -25,7 +26,7 @@ class ControllerCommand extends BaseCommand {
     		$name = explode("\\", $model);
     		$name = $name[count($name) - 1];
     	}
-        $controller = ucwords(str_plural($name)) . 'Controller';
+        $controller = ucwords(Str::plural($name)) . 'Controller';
         $content = $this->getTemplate('controller')
         	->with([
         		'name' => $controller,
@@ -36,7 +37,7 @@ class ControllerCommand extends BaseCommand {
         $this->save($content, "./app/Http/Controllers/{$controller}.php", "{$controller}");
         if(! $this->option('no-routes')){
             $options = [
-                'resource' => snake_case($name, '-'),
+                'resource' => Str::snake($name, '-'),
                 '--controller' => $controller,
             ];
 
@@ -44,7 +45,7 @@ class ControllerCommand extends BaseCommand {
                 $options['--laravel'] = true;
             }
 
-            $this->call('wn:route', $options);
+            $this->call('tdev:route', $options);
         }
     }
 

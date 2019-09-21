@@ -3,7 +3,7 @@ $I = new AcceptanceTester($scenario);
 
 $I->wantTo('Generate RESTful resources from a file with Laravel Routes');
 $I->writeToFile('database/database.sqlite', '');
-$I->runShellCommand('php artisan wn:resources tests/_data/ResourcesTest.yml --laravel=true');
+$I->runShellCommand('php artisan tdev:resources tests/_data/ResourcesTest.yml --laravel=true');
 
 // Checking the model
 $I->seeInShellOutput('Author model generated');

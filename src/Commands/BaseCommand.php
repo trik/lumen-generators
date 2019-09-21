@@ -1,10 +1,10 @@
-<?php namespace Wn\Generators\Commands;
+<?php namespace Tdev\Generators\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
-use Wn\Generators\Argument\ArgumentFormatLoader;
-use Wn\Generators\Argument\ArgumentParser;
-use Wn\Generators\Template\TemplateLoader;
+use Tdev\Generators\Argument\ArgumentFormatLoader;
+use Tdev\Generators\Argument\ArgumentParser;
+use Tdev\Generators\Template\TemplateLoader;
 
 
 class BaseCommand extends Command {

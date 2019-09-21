@@ -1,8 +1,8 @@
 # models
-rm app/*.php 2> /dev/null
+rm -f app/*.php 2> /dev/null
 
 # migrations
-rm database/migrations/*.php 2> /dev/null
+rm -f database/migrations/*.php 2> /dev/null
 
 # routes
 echo "<?php
@@ -11,6 +11,7 @@ echo "<?php
     return \$app->welcome();
 });" > app/Http/routes.php
 
+mkdir -p routes
 echo "<?php
 /*
 |------------------------------------------
@@ -20,7 +21,7 @@ echo "<?php
 " > routes/api.php
 
 # Controllers
-rm app/Http/Controllers/*.php 2> /dev/null
+rm -f app/Http/Controllers/*.php 2> /dev/null
 echo "<?php
 
 namespace App\Http\Controllers;
@@ -47,5 +48,5 @@ echo "<?php
 " > database/factories/ModelFactory.php
 
 # database
-rm database/database.sqlite 2> /dev/null
+rm -f database/database.sqlite 2> /dev/null
 touch database/database.sqlite

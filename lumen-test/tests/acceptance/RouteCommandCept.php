@@ -2,7 +2,7 @@
 $I = new AcceptanceTester($scenario);
 
 $I->wantTo('generate RESTful routes for a resource with default controller');
-$I->runShellCommand('php artisan wn:route project-type');
+$I->runShellCommand('php artisan tdev:route project-type');
 $I->seeInShellOutput('project-type routes generated');
 $I->openFile('./app/Http/routes.php');
 $I->seeInThisFile("
@@ -32,7 +32,7 @@ $app->get("/", function () use ($app) {
 
 
 $I->wantTo('generate RESTful routes for a resource with custom controller');
-$I->runShellCommand('php artisan wn:route foo --controller=customController');
+$I->runShellCommand('php artisan tdev:route foo --controller=customController');
 $I->seeInShellOutput('foo routes generated');
 $I->openFile('./app/Http/routes.php');
 $I->seeInThisFile("
@@ -61,7 +61,7 @@ $app->get("/", function () use ($app) {
 ');
 
 
-$I->wantTo('run wn:routes in Lumen 5.3+');
+$I->wantTo('run tdev:routes in Lumen 5.3+');
 if(!file_exists('./routes')) {
     mkdir('./routes');
 }
@@ -83,7 +83,7 @@ $app->get("/", function () use ($app) {
 });
 ');
 
-$I->runShellCommand('php artisan wn:route foo --controller=customController');
+$I->runShellCommand('php artisan tdev:route foo --controller=customController');
 $I->seeInShellOutput('foo routes generated');
 $I->openFile('./routes/web.php');
 $I->seeInThisFile("

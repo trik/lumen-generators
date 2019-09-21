@@ -1,8 +1,8 @@
-<?php namespace Wn\Generators\Template;
+<?php namespace Tdev\Generators\Template;
 
 use Illuminate\Filesystem\Filesystem;
-use Wn\Generators\Exceptions\TemplateException;
-use Wn\Generators\Template\Template;
+use Tdev\Generators\Exceptions\TemplateException;
+use Tdev\Generators\Template\Template;
 
 
 class TemplateLoader {

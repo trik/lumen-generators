@@ -2,7 +2,7 @@
 $I = new AcceptanceTester($scenario);
 
 $I->wantTo('generate a model without fillable fields or dates');
-$I->runShellCommand('php artisan wn:model TestingModel --path=tests/tmp --force=true');
+$I->runShellCommand('php artisan tdev:model TestingModel --path=tests/tmp --force=true');
 $I->seeInShellOutput('TestingModel model generated');
 $I->seeFileFound('./tests/tmp/TestingModel.php');
 $I->openFile('./tests/tmp/TestingModel.php');
@@ -28,7 +28,7 @@ class TestingModel extends Model {
 $I->deleteFile('./tests/tmp/TestingModel.php');
 
 $I->wantTo('generate a model without fillable fields, dates or timestamps');
-$I->runShellCommand('php artisan wn:model TestingModel --path=tests/tmp --force=true --timestamps=false');
+$I->runShellCommand('php artisan tdev:model TestingModel --path=tests/tmp --force=true --timestamps=false');
 $I->seeInShellOutput('TestingModel model generated');
 $I->seeFileFound('./tests/tmp/TestingModel.php');
 $I->openFile('./tests/tmp/TestingModel.php');
@@ -56,21 +56,21 @@ class TestingModel extends Model {
 $I->deleteFile('./tests/tmp/TestingModel.php');
 
 $I->wantTo('generate a model with fillable fields');
-$I->runShellCommand('php artisan wn:model TestingModel --fillable=name,title --path=tests/tmp');
+$I->runShellCommand('php artisan tdev:model TestingModel --fillable=name,title --path=tests/tmp');
 $I->seeFileFound('./tests/tmp/TestingModel.php');
 $I->openFile('./tests/tmp/TestingModel.php');
 $I->seeInThisFile('protected $fillable = ["name", "title"];');
 $I->deleteFile('./tests/tmp/TestingModel.php');
 
 $I->wantTo('generate a model with dates fields');
-$I->runShellCommand('php artisan wn:model TestingModel --dates=started_at --path=tests/tmp');
+$I->runShellCommand('php artisan tdev:model TestingModel --dates=started_at --path=tests/tmp');
 $I->seeFileFound('./tests/tmp/TestingModel.php');
 $I->openFile('./tests/tmp/TestingModel.php');
 $I->seeInThisFile('protected $dates = ["started_at"];');
 $I->deleteFile('./tests/tmp/TestingModel.php');
 
 $I->wantTo('generate a model with relations');
-$I->runShellCommand('php artisan wn:model TestingModel --has-many=accounts --belongs-to="owner:App\User" --has-one=number:Phone --path=tests/tmp');
+$I->runShellCommand('php artisan tdev:model TestingModel --has-many=accounts --belongs-to="owner:App\User" --has-one=number:Phone --path=tests/tmp');
 $I->seeFileFound('./tests/tmp/TestingModel.php');
 $I->openFile('./tests/tmp/TestingModel.php');
 $I->seeInThisFile('
@@ -94,7 +94,7 @@ $I->seeInThisFile('
 $I->deleteFile('./tests/tmp/TestingModel.php');
 
 $I->wantTo('generate a model with validation rules');
-$I->runShellCommand('php artisan wn:model TestingModel --rules="name=required age=integer|min:13 email=email|unique:users,email_address" --path=tests/tmp');
+$I->runShellCommand('php artisan tdev:model TestingModel --rules="name=required age=integer|min:13 email=email|unique:users,email_address" --path=tests/tmp');
 $I->seeFileFound('./tests/tmp/TestingModel.php');
 $I->openFile('./tests/tmp/TestingModel.php');
 $I->seeInThisFile(
@@ -108,7 +108,7 @@ $I->seeInThisFile(
 $I->deleteFile('./tests/tmp/TestingModel.php');
 
 $I->wantTo('generate a model with softDeletes');
-$I->runShellCommand('php artisan wn:model TestingModel --soft-deletes=true --path=tests/tmp --force=true');
+$I->runShellCommand('php artisan tdev:model TestingModel --soft-deletes=true --path=tests/tmp --force=true');
 $I->seeFileFound('./tests/tmp/TestingModel.php');
 $I->openFile('./tests/tmp/TestingModel.php');
 $I->seeFileContentsEqual('<?php namespace Tests\Tmp;

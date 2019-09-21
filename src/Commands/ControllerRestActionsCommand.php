@@ -1,9 +1,9 @@
-<?php namespace Wn\Generators\Commands;
+<?php namespace Tdev\Generators\Commands;
 
 
 class ControllerRestActionsCommand extends BaseCommand {
 
-	protected $signature = 'wn:controller:rest-actions
+	protected $signature = 'tdev:controller:rest-actions
 		{--force= : override the existing files}';
 
 	protected $description = 'Generates REST actions trait to use into controllers';

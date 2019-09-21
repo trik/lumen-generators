@@ -4,7 +4,7 @@ $I = new AcceptanceTester($scenario);
 $I->wantTo('Generate RESTful resources from a file');
 $I->writeToFile('database/database.sqlite', '');
 
-$I->runShellCommand('php artisan wn:resources tests/_data/ResourcesTest.yml');
+$I->runShellCommand('php artisan tdev:resources tests/_data/ResourcesTest.yml');
 
 // Checking the model
 $I->seeInShellOutput('Author model generated');

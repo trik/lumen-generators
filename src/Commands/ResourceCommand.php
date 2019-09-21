@@ -1,11 +1,12 @@
-<?php namespace Wn\Generators\Commands;
+<?php namespace Tdev\Generators\Commands;
 
 
 use InvalidArgumentException;
+use Illuminate\Support\Str;
 
 class ResourceCommand extends BaseCommand {
 
-    protected $signature = 'wn:resource
+    protected $signature = 'tdev:resource
         {name : Name of the resource.}
         {fields : fields description.}
         {--has-many= : hasMany relationships.}
@@ -29,11 +30,11 @@ class ResourceCommand extends BaseCommand {
         $this->parseFields();
 
         $resourceName = $this->argument('name');
-        $modelName = ucwords(camel_case($resourceName));
-        $tableName = str_plural($resourceName);
+        $modelName = ucwords(Str::camel($resourceName));
+        $tableName = Str::plural($resourceName);
 
         // generating the model
-        $this->call('wn:model', [
+        $this->call('tdev:model', [
             'name' => $modelName,
             '--fillable' => $this->fieldsHavingTag('fillable'),
             '--dates' => $this->fieldsHavingTag('date'),
@@ -50,7 +51,7 @@ class ResourceCommand extends BaseCommand {
         ]);
 
         // generating the migration
-        $this->call('wn:migration', [
+        $this->call('tdev:migration', [
             'table' => $tableName,
             '--schema' => $this->schema(),
             '--keys' => $this->migrationKeys(),
@@ -62,7 +63,7 @@ class ResourceCommand extends BaseCommand {
 
         // generating REST actions trait if doesn't exist
         if(! $this->fs->exists('./app/Http/Controllers/RESTActions.php')){
-            $this->call('wn:controller:rest-actions');
+            $this->call('tdev:controller:rest-actions');
         }
         // generating the controller and routes
         $controllerOptions = [
@@ -73,10 +74,10 @@ class ResourceCommand extends BaseCommand {
         if ($this->option('laravel')) {
             $controllerOptions['--laravel'] = true;
         }
-        $this->call('wn:controller', $controllerOptions);
+        $this->call('tdev:controller', $controllerOptions);
 
         // generating model factory
-        $this->call('wn:factory', [
+        $this->call('tdev:factory', [
             'model' => 'App\\' . $modelName,
             '--fields' => $this->factoryFields(),
             '--force' => $this->option('force'),
@@ -84,7 +85,7 @@ class ResourceCommand extends BaseCommand {
         ]);
 
         // generating database seeder
-        // $this->call('wn:seeder', [
+        // $this->call('tdev:seeder', [
         //     'model' => 'App\\' . $modelName
         // ]);
 
@@ -162,7 +163,7 @@ class ResourceCommand extends BaseCommand {
             if($index) {
                 $name = substr($name, $index + 1);
             }
-            return snake_case(str_singular($name)) . '_id';
+            return Str::snake(Str::singular($name)) . '_id';
         }, $relations);
     }
 

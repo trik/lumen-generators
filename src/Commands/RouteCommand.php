@@ -1,11 +1,12 @@
-<?php namespace Wn\Generators\Commands;
+<?php namespace Tdev\Generators\Commands;
 
 
 use InvalidArgumentException;
+use Illuminate\Support\Str;
 
 class RouteCommand extends BaseCommand {
 
-	protected $signature = 'wn:route
+	protected $signature = 'tdev:route
 		{resource : Name of the resource.}
         {--controller= : Name of the RESTful controller.}
         {--laravel= : Use Laravel style route definitions}
@@ -68,7 +69,7 @@ class RouteCommand extends BaseCommand {
     {
         $controller = $this->option('controller');
         if(! $controller){
-            $controller = ucwords(str_plural(camel_case($this->argument('resource')))) . 'Controller';
+            $controller = ucwords(Str::plural(Str::camel($this->argument('resource')))) . 'Controller';
         }
         return $controller;
     }
