@@ -1,8 +1,8 @@
-<?php namespace Wn\Generators\Argument;
+<?php namespace Tdev\Generators\Argument;
 
 use Illuminate\Filesystem\Filesystem;
-use Wn\Generators\Argument\ArgumentFormat;
-use Wn\Generators\Exceptions\ArgumentFormatException;
+use Tdev\Generators\Argument\ArgumentFormat;
+use Tdev\Generators\Exceptions\ArgumentFormatException;
 
 
 class ArgumentFormatLoader {

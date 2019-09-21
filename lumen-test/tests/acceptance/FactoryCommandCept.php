@@ -2,7 +2,7 @@
 $I = new AcceptanceTester($scenario);
 
 $I->wantTo('generate model factories without fields');
-$I->runShellCommand('php artisan wn:factory "App\Task"');
+$I->runShellCommand('php artisan tdev:factory "App\Task"');
 $I->seeInShellOutput('App\Task factory generated');
 $I->openFile('./database/factories/ModelFactory.php');
 $I->seeInThisFile('
@@ -35,7 +35,7 @@ $I->writeToFile('./database/factories/ModelFactory.php', "<?php
 ");
 
 $I->wantTo('generate model factories with fields');
-$I->runShellCommand('php artisan wn:factory "App\Task" --fields="title:sentence(3),description:paragraph(3),due:date,hidden:boolean"');
+$I->runShellCommand('php artisan tdev:factory "App\Task" --fields="title:sentence(3),description:paragraph(3),due:date,hidden:boolean"');
 $I->seeInShellOutput('App\Task factory generated');
 $I->openFile('./database/factories/ModelFactory.php');
 $I->seeInThisFile(

@@ -4,7 +4,7 @@ $I = new AcceptanceTester($scenario);
 $I->wantTo('Generate RESTful resources from a file');
 $I->writeToFile('database/database.sqlite', '');
 
-$I->runShellCommand('php artisan wn:resources tests/_data/ResourcesTest.yml');
+$I->runShellCommand('php artisan tdev:resources tests/_data/ResourcesTest.yml');
 
 // Checking the model
 $I->seeInShellOutput('Author model generated');
@@ -43,7 +43,7 @@ $I->deleteFile('./app/Http/Controllers/BooksController.php');
 
 
 // Checking routes
-$I->openFile('./app/Http/routes.php');
+$I->openFile('./routes/web.php');
 $I->seeInThisFile('
 $app->get(\'author\', \'AuthorsController@all\');
 $app->get(\'author/{id}\', \'AuthorsController@get\');
@@ -64,7 +64,7 @@ $app->get(\'library/{id}\', \'LibrariesController@get\');
 $app->post(\'library\', \'LibrariesController@add\');
 $app->put(\'library/{id}\', \'LibrariesController@put\');
 $app->delete(\'library/{id}\', \'LibrariesController@remove\');');
-$I->writeToFile('./app/Http/routes.php', '<?php
+$I->writeToFile('./routes/web.php', '<?php
 
 /*
 |--------------------------------------------------------------------------

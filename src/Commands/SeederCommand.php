@@ -1,9 +1,10 @@
-<?php namespace Wn\Generators\Commands;
+<?php namespace Tdev\Generators\Commands;
 
+use Illuminate\Support\Str;
 
 class SeederCommand extends BaseCommand {
 
-	protected $signature = 'wn:seeder
+	protected $signature = 'tdev:seeder
         {model : full qualified name of the model.}
         {--count=10 : number of elements to add in database.}
         {--force= : override the existing files}
@@ -32,7 +33,7 @@ class SeederCommand extends BaseCommand {
     protected function getSeederName($name)
     {
         $name = explode("\\", $name);
-        $name = ucwords(str_plural($name[count($name) - 1]));
+        $name = ucwords(Str::plural($name[count($name) - 1]));
         $name = $name . 'TableSeeder';
         return $name;
     }

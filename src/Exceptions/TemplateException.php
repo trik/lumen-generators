@@ -1,4 +1,4 @@
-<?php namespace Wn\Generators\Exceptions;
+<?php namespace Tdev\Generators\Exceptions;
 
 
 class TemplateException extends \Exception {}

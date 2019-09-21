@@ -1,12 +1,13 @@
-<?php namespace Wn\Generators\Commands;
+<?php namespace Tdev\Generators\Commands;
 
 use InvalidArgumentException;
+use Illuminate\Support\Str;
 use Symfony\Component\Yaml\Yaml;
 
 
 class ResourcesCommand extends BaseCommand {
 
-    protected $signature = 'wn:resources
+    protected $signature = 'tdev:resources
         {file : Path to the file containing resources declarations}
         {--path=app : where to store the model files.}
         {--force= : override the existing files}
@@ -26,8 +27,8 @@ class ResourcesCommand extends BaseCommand {
         $modelIndex = 0;
         foreach ($content as $model => $i){
             $i = $this->getResourceParams($model, $i);
-            $migrationName = 'Create' .  ucwords(str_plural($i['name']));
-            $migrationFile = date('Y_m_d_His') . '-' . str_pad($modelIndex , 3, 0, STR_PAD_LEFT) . '_' . snake_case($migrationName) . '_table';
+            $migrationName = 'Create' .  ucwords(Str::plural($i['name']));
+            $migrationFile = date('Y_m_d_His') . '-' . str_pad($modelIndex , 3, 0, STR_PAD_LEFT) . '_' . Str::snake($migrationName) . '_table';
 
 
             $options = [
@@ -46,7 +47,7 @@ class ResourcesCommand extends BaseCommand {
                 $options['--laravel'] = true;
             }
 
-            $this->call('wn:resource', $options);
+            $this->call('tdev:resource', $options);
             $modelIndex++;
         }
 
@@ -58,13 +59,13 @@ class ResourcesCommand extends BaseCommand {
         );
 
         foreach ($this->pivotTables as $tables) {
-            $this->call('wn:pivot-table', [
+            $this->call('tdev:pivot-table', [
                 'model1' => $tables[0],
                 'model2' => $tables[1],
                 '--force' => $this->option('force')
             ]);
 
-            // $this->call('wn:pivot-seeder', [
+            // $this->call('tdev:pivot-seeder', [
             //     'model1' => $tables[0],
             //     'model2' => $tables[1],
             //     '--force' => $this->option('force')
@@ -76,7 +77,7 @@ class ResourcesCommand extends BaseCommand {
 
     protected function getResourceParams($modelName, $i)
     {
-        $i['name'] = snake_case($modelName);
+        $i['name'] = Str::snake($modelName);
 
         foreach(['hasMany', 'hasOne', 'add', 'belongsTo', 'belongsToMany'] as $relation){
             if(isset($i[$relation])){
@@ -92,13 +93,13 @@ class ResourcesCommand extends BaseCommand {
                 $table = '';
 
                 if(! $relation['model']){
-                    $table = snake_case($relation['name']);
+                    $table = Str::snake($relation['name']);
                 } else {
                     $names = array_reverse(explode("\\", $relation['model']));
-                    $table = snake_case($names[0]);
+                    $table = Str::snake($names[0]);
                 }
 
-                $tables = [ str_singular($table), $i['name'] ];
+                $tables = [ Str::singular($table), $i['name'] ];
                 sort($tables);
                 $this->pivotTables[] = $tables;
             }

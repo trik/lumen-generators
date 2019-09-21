@@ -1,4 +1,4 @@
-<?php namespace Wn\Generators;
+<?php namespace Tdev\Generators;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -22,87 +22,87 @@ class CommandsServiceProvider extends ServiceProvider
     }
 
     protected function registerModelCommand(){
-        $this->app->singleton('command.wn.model', function($app){
-            return $app['Wn\Generators\Commands\ModelCommand'];
+        $this->app->singleton('command.tdev.model', function($app){
+            return $app['Tdev\Generators\Commands\ModelCommand'];
         });
-        $this->commands('command.wn.model');
+        $this->commands('command.tdev.model');
     }
 
     protected function registerControllerRestActionsCommand(){
-        $this->app->singleton('command.wn.controller.rest-actions', function($app){
-            return $app['Wn\Generators\Commands\ControllerRestActionsCommand'];
+        $this->app->singleton('command.tdev.controller.rest-actions', function($app){
+            return $app['Tdev\Generators\Commands\ControllerRestActionsCommand'];
         });
-        $this->commands('command.wn.controller.rest-actions');
+        $this->commands('command.tdev.controller.rest-actions');
     }
 
     protected function registerControllerCommand(){
-        $this->app->singleton('command.wn.controller', function($app){
-            return $app['Wn\Generators\Commands\ControllerCommand'];
+        $this->app->singleton('command.tdev.controller', function($app){
+            return $app['Tdev\Generators\Commands\ControllerCommand'];
         });
-        $this->commands('command.wn.controller');
+        $this->commands('command.tdev.controller');
     }
 
     protected function registerMigrationCommand(){
-        $this->app->singleton('command.wn.migration', function($app){
-            return $app['Wn\Generators\Commands\MigrationCommand'];
+        $this->app->singleton('command.tdev.migration', function($app){
+            return $app['Tdev\Generators\Commands\MigrationCommand'];
         });
-        $this->commands('command.wn.migration');
+        $this->commands('command.tdev.migration');
     }
 
     protected function registerRouteCommand(){
-        $this->app->singleton('command.wn.route', function($app){
-            return $app['Wn\Generators\Commands\RouteCommand'];
+        $this->app->singleton('command.tdev.route', function($app){
+            return $app['Tdev\Generators\Commands\RouteCommand'];
         });
-        $this->commands('command.wn.route');
+        $this->commands('command.tdev.route');
     }
 
     protected function registerTestCommand(){
-        $this->app->singleton('command.wn.test', function($app){
-            return $app['Wn\Generators\Commands\TestCommand'];
+        $this->app->singleton('command.tdev.test', function($app){
+            return $app['Tdev\Generators\Commands\TestCommand'];
         });
-        $this->commands('command.wn.test');
+        $this->commands('command.tdev.test');
     }
 
     protected function registerResourceCommand(){
-        $this->app->singleton('command.wn.resource', function($app){
-            return $app['Wn\Generators\Commands\ResourceCommand'];
+        $this->app->singleton('command.tdev.resource', function($app){
+            return $app['Tdev\Generators\Commands\ResourceCommand'];
         });
-        $this->commands('command.wn.resource');
+        $this->commands('command.tdev.resource');
     }
 
     protected function registerResourcesCommand(){
-        $this->app->singleton('command.wn.resources', function($app){
-            return $app['Wn\Generators\Commands\ResourcesCommand'];
+        $this->app->singleton('command.tdev.resources', function($app){
+            return $app['Tdev\Generators\Commands\ResourcesCommand'];
         });
-        $this->commands('command.wn.resources');
+        $this->commands('command.tdev.resources');
     }
 
     protected function registerPivotTableCommand(){
-        $this->app->singleton('command.wn.pivot-table', function($app){
-            return $app['Wn\Generators\Commands\PivotTableCommand'];
+        $this->app->singleton('command.tdev.pivot-table', function($app){
+            return $app['Tdev\Generators\Commands\PivotTableCommand'];
         });
-        $this->commands('command.wn.pivot-table');
+        $this->commands('command.tdev.pivot-table');
     }
 
     protected function registerFactoryCommand(){
-        $this->app->singleton('command.wn.factory', function($app){
-            return $app['Wn\Generators\Commands\FactoryCommand'];
+        $this->app->singleton('command.tdev.factory', function($app){
+            return $app['Tdev\Generators\Commands\FactoryCommand'];
         });
-        $this->commands('command.wn.factory');
+        $this->commands('command.tdev.factory');
     }
 
     protected function registerSeederCommand(){
-        $this->app->singleton('command.wn.seeder', function($app){
-            return $app['Wn\Generators\Commands\SeederCommand'];
+        $this->app->singleton('command.tdev.seeder', function($app){
+            return $app['Tdev\Generators\Commands\SeederCommand'];
         });
-        $this->commands('command.wn.seeder');
+        $this->commands('command.tdev.seeder');
     }
 
     protected function registerPivotSeederCommand(){
-        $this->app->singleton('command.wn.pivot.seeder', function($app){
-            return $app['Wn\Generators\Commands\PivotSeederCommand'];
+        $this->app->singleton('command.tdev.pivot.seeder', function($app){
+            return $app['Tdev\Generators\Commands\PivotSeederCommand'];
         });
-        $this->commands('command.wn.pivot.seeder');
+        $this->commands('command.tdev.pivot.seeder');
     }
 
 }

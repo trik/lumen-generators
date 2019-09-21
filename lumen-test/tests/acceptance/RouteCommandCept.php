@@ -2,9 +2,9 @@
 $I = new AcceptanceTester($scenario);
 
 $I->wantTo('generate RESTful routes for a resource with default controller');
-$I->runShellCommand('php artisan wn:route project-type');
+$I->runShellCommand('php artisan tdev:route project-type');
 $I->seeInShellOutput('project-type routes generated');
-$I->openFile('./app/Http/routes.php');
+$I->openFile('./routes/web.php');
 $I->seeInThisFile("
 \$app->get('project-type', 'ProjectTypesController@all');
 \$app->get('project-type/{id}', 'ProjectTypesController@get');
@@ -12,7 +12,7 @@ $I->seeInThisFile("
 \$app->put('project-type/{id}', 'ProjectTypesController@put');
 \$app->delete('project-type/{id}', 'ProjectTypesController@remove');
 ");
-$I->writeToFile('./app/Http/routes.php', '<?php
+$I->writeToFile('./routes/web.php', '<?php
 
 /*
 |--------------------------------------------------------------------------
@@ -32,9 +32,9 @@ $app->get("/", function () use ($app) {
 
 
 $I->wantTo('generate RESTful routes for a resource with custom controller');
-$I->runShellCommand('php artisan wn:route foo --controller=customController');
+$I->runShellCommand('php artisan tdev:route foo --controller=customController');
 $I->seeInShellOutput('foo routes generated');
-$I->openFile('./app/Http/routes.php');
+$I->openFile('./routes/web.php');
 $I->seeInThisFile("
 \$app->get('foo', 'customController@all');
 \$app->get('foo/{id}', 'customController@get');
@@ -42,7 +42,7 @@ $I->seeInThisFile("
 \$app->put('foo/{id}', 'customController@put');
 \$app->delete('foo/{id}', 'customController@remove');
 ");
-$I->writeToFile('./app/Http/routes.php', '<?php
+$I->writeToFile('./routes/web.php', '<?php
 
 /*
 |--------------------------------------------------------------------------
@@ -61,7 +61,7 @@ $app->get("/", function () use ($app) {
 ');
 
 
-$I->wantTo('run wn:routes in Lumen 5.3+');
+$I->wantTo('run tdev:routes in Lumen 5.3+');
 if(!file_exists('./routes')) {
     mkdir('./routes');
 }
@@ -83,7 +83,7 @@ $app->get("/", function () use ($app) {
 });
 ');
 
-$I->runShellCommand('php artisan wn:route foo --controller=customController');
+$I->runShellCommand('php artisan tdev:route foo --controller=customController');
 $I->seeInShellOutput('foo routes generated');
 $I->openFile('./routes/web.php');
 $I->seeInThisFile("

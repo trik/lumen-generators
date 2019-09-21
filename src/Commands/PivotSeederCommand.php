@@ -1,9 +1,10 @@
-<?php namespace Wn\Generators\Commands;
+<?php namespace Tdev\Generators\Commands;
 
+use Illuminate\Support\Str;
 
 class PivotSeederCommand extends BaseCommand {
 
-	protected $signature = 'wn:pivot-seeder
+	protected $signature = 'tdev:pivot-seeder
         {model1 : Name of the first model or table}
         {model2 : Name of the second model or table}
         {--count=10 : number of elements to add in database.}
@@ -36,7 +37,7 @@ class PivotSeederCommand extends BaseCommand {
     protected function getResources()
     {
         $resources = array_map(function($arg) {
-            return snake_case(str_singular($this->argument($arg)));
+            return Str::snake(Str::singular($this->argument($arg)));
         }, ['model1', 'model2']);
 
         sort($resources);
@@ -46,13 +47,13 @@ class PivotSeederCommand extends BaseCommand {
 
     protected function getSeederName($resources) {
         $resources = array_map(function($resource){
-            return ucwords(camel_case($resource));
+            return ucwords(Str::camel($resource));
         }, $resources);
         return implode('', $resources) . 'TableSeeder';
     }
 
     protected function getTableNames($resources) {
-        return array_map('str_plural', $resources);
+        return array_map('Str::plural', $resources);
     }
 
 }

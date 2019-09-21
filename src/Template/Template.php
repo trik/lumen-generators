@@ -1,6 +1,6 @@
-<?php namespace Wn\Generators\Template;
+<?php namespace Tdev\Generators\Template;
 
-use Wn\Generators\Template\TemplateLoader;
+use Tdev\Generators\Template\TemplateLoader;
 
 
 class Template {

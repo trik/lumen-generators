@@ -14,6 +14,6 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         // Adding providers for local development
-        $this->app->register('Wn\Generators\CommandsServiceProvider');
+        $this->app->register('Tdev\Generators\CommandsServiceProvider');
     }
 }

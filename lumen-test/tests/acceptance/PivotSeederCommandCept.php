@@ -2,7 +2,7 @@
 $I = new AcceptanceTester($scenario);
 
 // $I->wantTo('generate a pivot table seeder');
-// $I->runShellCommand('php artisan wn:pivot-seeder tasks ShortTag');
+// $I->runShellCommand('php artisan tdev:pivot-seeder tasks ShortTag');
 // $I->seeInShellOutput('ShortTagTaskTableSeeder generated');
 // $I->openFile('./database/seeds/ShortTagTaskTableSeeder.php');
 // $I->seeInThisFile("

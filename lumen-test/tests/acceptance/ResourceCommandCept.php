@@ -2,7 +2,7 @@
 $I = new AcceptanceTester($scenario);
 
 $I->wantTo('generate a RESTful resource');
-$I->runShellCommand('php artisan wn:resource task_category "name;string:unique;requied;fillable;word descr;text:nullable;;fillable;paragraph due;timestamp;;fillable,date;date" --has-many="tags,tasks" --belongs-to="project,creator:User" --add=timestamps --migration-file=create_task_categories');
+$I->runShellCommand('php artisan tdev:resource task_category "name;string:unique;requied;fillable;word descr;text:nullable;;fillable;paragraph due;timestamp;;fillable,date;date" --has-many="tags,tasks" --belongs-to="project,creator:User" --add=timestamps --migration-file=create_task_categories');
 
 // Checking the model
 $I->seeInShellOutput('TaskCategory model generated');
@@ -75,7 +75,7 @@ $I->openFile('./app/Http/Controllers/TaskCategoriesController.php');
 
 $I->seeInThisFile('class TaskCategoriesController extends Controller {
 
-    const MODEL = "App\TaskCategory";
+    const MODEL = \'App\TaskCategory\';
 
     use RESTActions;
 
@@ -84,14 +84,14 @@ $I->seeInThisFile('class TaskCategoriesController extends Controller {
 $I->deleteFile('./app/Http/Controllers/TaskCategoriesController.php');
 
 // Checking routes
-$I->openFile('./app/Http/routes.php');
+$I->openFile('./routes/web.php');
 $I->seeInThisFile('
 $app->get(\'task-category\', \'TaskCategoriesController@all\');
 $app->get(\'task-category/{id}\', \'TaskCategoriesController@get\');
 $app->post(\'task-category\', \'TaskCategoriesController@add\');
 $app->put(\'task-category/{id}\', \'TaskCategoriesController@put\');
 $app->delete(\'task-category/{id}\', \'TaskCategoriesController@remove\');');
-$I->writeToFile('./app/Http/routes.php', '<?php
+$I->writeToFile('./routes/web.php', '<?php
 
 /*
 |--------------------------------------------------------------------------

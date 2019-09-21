@@ -1,7 +1,7 @@
-<?php namespace Wn\Generators\Argument;
+<?php namespace Tdev\Generators\Argument;
 
-use Wn\Generators\Argument\ArgumentFormat;
-use Wn\Generators\Exceptions\ArgumentParserException;
+use Tdev\Generators\Argument\ArgumentFormat;
+use Tdev\Generators\Exceptions\ArgumentParserException;
 
 
 class ArgumentParser {
