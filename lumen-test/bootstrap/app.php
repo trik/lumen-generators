@@ -2,7 +2,7 @@
 
 require_once __DIR__.'/../vendor/autoload.php';
 
-Dotenv\Dotenv::create(__DIR__.'/../')->load();
+Dotenv\Dotenv::createImmutable(__DIR__.'/../')->load();
 
 /*
 |--------------------------------------------------------------------------
@@ -93,7 +93,8 @@ $app->register(App\Providers\AppServiceProvider::class);
 */
 
 $app->router->group(['namespace' => 'App\Http\Controllers'], function ($app) {
-    require __DIR__.'/../app/Http/routes.php';
+    require __DIR__.'/../routes/api.php';
+    require __DIR__.'/../routes/web.php';
 });
 
 return $app;
